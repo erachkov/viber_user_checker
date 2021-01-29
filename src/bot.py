@@ -63,11 +63,10 @@ def viber_user_checker(input_list):
     list_number = list(map(str.strip, list_number))  # trim all element
     list_number = list(filter(bool, list_number))  # trim empty element
 
-    pyautogui.moveTo(400, 60)
     pyautogui.hotkey('Win')
     pyautogui.typewrite('Viber')
     pyautogui.keyDown('Enter')
-    time.sleep(TIMEOUT_IN_SEC)
+
 
     click_by_image("btn_not_full_screen", "en", "win")
 
@@ -91,7 +90,14 @@ def viber_user_checker(input_list):
 
         # touch user via mesage
         if not click_by_image("btn_send_message", "en", "win"):
-            raise Exception(EXCEPTION_MSG_CANNOT_CLICK)
+            if not click_by_image("btn_call", "en", "win"):
+                raise Exception(EXCEPTION_MSG_CANNOT_CLICK)
+
+            if not click_by_image("btn_show_dialer", "en", "win"):
+                raise Exception(EXCEPTION_MSG_CANNOT_CLICK)
+
+            pyautogui.typewrite(telephone_number)
+            click_by_image("btn_send_message", "en", "win")
 
         # get details of the user
         click_by_image("btn_show_user_details", "en", "win")
@@ -106,7 +112,7 @@ def viber_user_checker(input_list):
         else:
             x, y, h, w = pyautogui.locateOnScreen(f"{IMAGE_FOLDER}/win_en_btn_marker_for_screenshot.png")
 
-            time.sleep(1)
+            #time.sleep(1)
             if click_by_image("btn_user_offline", "en", "win"):
 
                 print(f"{telephone_number} is offline")
