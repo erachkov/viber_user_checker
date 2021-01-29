@@ -10,7 +10,7 @@ def timeit(f):
         ts = time.time()
         result = f(*args, **kw)
         te = time.time()
-        print('took: %2.4f sec' % (te - ts))
+        print('Took time: %2.2f sec Elements: %r Speed: %2.1f sec/tel' % (te - ts, len(args[0]),(te - ts)/len(args[0])))
         return result
 
     return timed
@@ -57,11 +57,8 @@ def click_by_image(image_name, lang, os, confidence=.9, grayscale=True):
 
 
 @timeit
-def viber_user_checker(input_list):
-    # clean and compact list
-    list_number = input_list.split(" ")
-    list_number = list(map(str.strip, list_number))  # trim all element
-    list_number = list(filter(bool, list_number))  # trim empty element
+def viber_user_checker(list_number):
+
 
     pyautogui.hotkey('Win')
     pyautogui.typewrite('Viber')
@@ -132,5 +129,9 @@ def viber_user_checker(input_list):
 
 
 if __name__ == '__main__':
+    # clean and compact list
+    list_number = INPUT_LIST_NUMBER.split(" ")
+    list_number = list(map(str.strip, list_number))  # trim all element
+    list_number = list(filter(bool, list_number))  # trim empty element
     # main runtime
-    viber_user_checker(INPUT_LIST_NUMBER)
+    viber_user_checker(list_number)
