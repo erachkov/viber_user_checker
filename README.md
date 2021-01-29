@@ -1,6 +1,12 @@
-# viber_user_checker
+# Checker viber user status  
 
-# Setup
+# NOTE! 
+The current version of the script just work under windows 10 where installed official viber
+
+# Prerequisites
+1. Change viber lang to English - other lang the script does not support
+
+# Setup and Run
 
 1. setup python 3.8 on windows 10 (https://www.python.org/downloads/release/python-387/) and check in CMD #python --version
 2. clone project from GitHub  git clone git@github.com:erachkov/viber_user_checker.git or download
